@@ -3,7 +3,89 @@
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';
 
+:root {
+    --brand-primary: #00b300;
+    --brand-primary-soft: #33c233;
+    --brand-primary-deep: #008f00;
+    --brand-primary-rgb: 0, 179, 0;
+}
+
 @theme {
-    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-        'Segoe UI Symbol', 'Noto Color Emoji';
+    --font-sans: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+
+    --color-page: #0d0d0d;
+    --color-surface: #111d11;
+    --color-surface-raised: #162616;
+    --color-border-soft: #1d2f1d;
+    --color-border-strong: #2f472f;
+    --color-ink: #f3f3f3;
+    --color-ink-muted: #aaaaaa;
+    --color-ink-subtle: #868686;
+    --color-danger: #ff5e58;
+    --color-warning: #f5a524;
+    --color-info: #4da3ff;
+
+    --text-hero: 30px;
+    --text-hero--line-height: 38px;
+    --text-section: 22px;
+    --text-section--line-height: 28px;
+    --text-block: 18px;
+    --text-block--line-height: 24px;
+    --text-card: 16px;
+    --text-card--line-height: 22px;
+    --text-body-lg: 16px;
+    --text-body-lg--line-height: 26px;
+    --text-body: 14px;
+    --text-body--line-height: 22px;
+    --text-caption: 12px;
+    --text-caption--line-height: 18px;
+    --text-eyebrow: 11px;
+    --text-eyebrow--line-height: 16px;
+
+    --radius-xs: 6px;
+    --radius-sm: 10px;
+    --radius-md: 16px;
+    --radius-lg: 24px;
+    --radius-xl: 32px;
+    --radius-pill: 999px;
+
+    --shadow-card-soft: 0 2px 8px rgb(0 0 0 / 0.2);
+    --shadow-card-strong: 0 4px 16px rgb(0 0 0 / 0.3);
+    --shadow-button-primary: 0 10px 30px rgb(var(--brand-primary-rgb) / 0.55);
+    --shadow-button-primary-hover: 0 12px 34px rgb(var(--brand-primary-rgb) / 0.7);
+}
+
+@theme inline {
+    --color-brand: var(--brand-primary);
+    --color-brand-soft: var(--brand-primary-soft);
+    --color-brand-deep: var(--brand-primary-deep);
+}
+
+@layer base {
+    html {
+        color-scheme: dark;
+    }
+
+    body {
+        @apply bg-page font-sans text-body text-ink antialiased;
+    }
+
+    input[type='checkbox'],
+    input[type='radio'] {
+        accent-color: var(--brand-primary);
+    }
+
+    :focus-visible {
+        outline: 2px solid var(--brand-primary);
+        outline-offset: 2px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+    }
 }
