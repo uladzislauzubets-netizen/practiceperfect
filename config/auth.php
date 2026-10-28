@@ -114,4 +114,10 @@ return [
 
     'password_timeout' => env('AUTH_PASSWORD_TIMEOUT', 10800),
 
+    'verification' => [
+        'expire' => (int) env('AUTH_VERIFICATION_EXPIRE', 1440),
+    ],
+
+    'setup_link_expire_days' => (int) env('AUTH_SETUP_LINK_EXPIRE_DAYS', 7),
+
 ];
