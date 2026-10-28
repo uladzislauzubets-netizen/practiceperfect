@@ -1,5 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
+use App\Http\Middleware\EnsureRole;
+use App\Http\Middleware\EnsureUserIsActive;
+use App\Http\Middleware\HandleImpersonation;
+use App\Http\Middleware\HandleInertiaRequests;
+use App\Http\Middleware\RejectChildAccounts;
+use App\Http\Middleware\RequirePasswordChange;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -12,7 +20,17 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
-        //
+        $middleware->web(append: [
+            HandleInertiaRequests::class,
+            HandleImpersonation::class,
+        ]);
+
+        $middleware->alias([
+            'role' => EnsureRole::class,
+            'active' => EnsureUserIsActive::class,
+            'password.changed' => RequirePasswordChange::class,
+            'not-child' => RejectChildAccounts::class,
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         $exceptions->shouldRenderJsonWhen(
